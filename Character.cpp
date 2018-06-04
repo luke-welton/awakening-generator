@@ -10,12 +10,7 @@ Character::Character() {
 Character::Character(int preset) {
     spouse = nullptr;
 
-    if (preset == 1 || preset == 23) {
-        hasUnique = true;
-    }
-    else {
-        hasUnique = false;
-    }
+    hasUnique = preset == 1 || preset == 23; //Unit is Chrom or Olivia
 
     switch (preset) {
         //Robin
@@ -560,19 +555,16 @@ Character::Character(int preset, Character parent) {
                 classes.push_back("Berserker");
                 classes.push_back("Warrior");
                 classes.push_back("War Monk");
-
-                parentClasses = parent.getClasses(true);
-                isMale = true;
             }
             else {
                 classes.push_back("Falcon Knight");
                 classes.push_back("Dark Flier");
                 classes.push_back("War Cleric");
                 classes.push_back("Valkyrie");
-
-                parentClasses = parent.getClasses(false);
-                isMale = false;
             }
+
+            isMale = !avatarIsMale;
+            parentClasses = parent.getClasses(isMale);
 
             break;
         }
@@ -778,16 +770,15 @@ Character::Character(int preset, Character parent) {
         }
     }
 
-    for (unsigned i = 0; i < parentClasses.size(); i++) {
-        if (!contains(classes, parentClasses[i])) {
-            classes.push_back(parentClasses[i]);
+    for (string pClass : parentClasses) {
+        if (!contains(classes, pClass)) {
+            classes.push_back(pClass);
         }
     }
 
     if (preset == 1) {
         altClasses.insert(altClasses.begin(), classes.begin() + 1, classes.end());
-    }
-    else {
+    } else {
         altClasses = classes;
     }
 }

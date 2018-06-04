@@ -23,9 +23,8 @@ int main() {
     marrySumia(&playableCharacters[9], playableCharacters);
 
     int females[] = {2, 23, 14, 4, /*9,*/ 17, 24, 15, 8, 21, 19};
-
-    for (unsigned i = 0; i < 10; i++) {
-        marry(&playableCharacters[females[i]], playableCharacters);
+    for (int femaleID : females) {
+        marry(&playableCharacters[femaleID], playableCharacters);
     }
 
     playableCharacters[30] = Character(1, *playableCharacters[1].getSpouse());
@@ -33,8 +32,7 @@ int main() {
     for (unsigned i = 0; i < 10; i++) {
         if (i < 4) {
             playableCharacters[32 + i] = Character(i + 2, *playableCharacters[females[i]].getSpouse());
-        }
-        else {
+        } else {
             playableCharacters[32 + i] = Character(i + 3, *playableCharacters[females[i]].getSpouse());
         }
     }
@@ -65,14 +63,12 @@ int main() {
     for (unsigned i = 0; i < 16; i++) {
         cout << chosenChars[i].getClass() << "!" << chosenChars[i].getName() << endl;
     }
-
     cout << endl;
 
     cout << "Here are your pairings: " << endl;
-
     cout << "Robin" << "/" << playableCharacters[0].getSpouse()->getName() << endl;
 
-    if (playableCharacters[0].getSpouse()->getName() != "Chrom") {
+    if (playableCharacters[0].getSpouse()->equals(playableCharacters[1])) {
         cout << "Chrom" << "/" << playableCharacters[1].getSpouse()->getName() << endl;
     }
 
@@ -81,11 +77,11 @@ int main() {
         cout << "Sumia" << "/" << playableCharacters[9].getSpouse()->getName() << endl;
     }
 
-    for (unsigned i = 0; i < 10; i++) {
-        if (!playableCharacters[0].getSpouse()->equals(playableCharacters[females[i]]) &&
-            !playableCharacters[1].getSpouse()->equals(playableCharacters[females[i]])) {
-            cout << playableCharacters[females[i]].getName() << "/"
-                 << playableCharacters[females[i]].getSpouse()->getName() << endl;
+    for (int femaleID : females) {
+        if (!playableCharacters[0].getSpouse()->equals(playableCharacters[femaleID]) &&
+            !playableCharacters[1].getSpouse()->equals(playableCharacters[femaleID])) {
+            cout << playableCharacters[femaleID].getName() << "/"
+                 << playableCharacters[femaleID].getSpouse()->getName() << endl;
         }
     }
 
