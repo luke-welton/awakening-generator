@@ -68,7 +68,7 @@ int main() {
     cout << "Here are your pairings: " << endl;
     cout << "Robin" << "/" << playableCharacters[0].getSpouse()->getName() << endl;
 
-    if (playableCharacters[0].getSpouse()->equals(playableCharacters[1])) {
+    if (!playableCharacters[0].getSpouse()->equals(playableCharacters[1])) {
         cout << "Chrom" << "/" << playableCharacters[1].getSpouse()->getName() << endl;
     }
 
@@ -164,8 +164,7 @@ void marry(Character* unit, Character romances[]) {
         int m[] = {3, 5, 6, 7, 10, 11, 12, 13, 16, 18, 20, 25};
         males = m;
         numMales = 12;
-    }
-    else {
+    } else {
         int m[] = {3, 5, 6, 7, 10, 11, 12, 13, 16, 18, 20, 25, 0};
         males = m;
         numMales = 13;
@@ -178,8 +177,6 @@ void marry(Character* unit, Character romances[]) {
             toMarry->marry(unit);
         }
     }
-
-    delete [] males;
 }
 
 void marryAvatar(Character* Robin, Character romances[]) {
